@@ -1,0 +1,16 @@
+{
+  "service": {
+    "name": "copilot-demo-app",
+    "port": 3000,
+    "logLevel": "info"
+  },
+  "features": {
+    "userRegistration": true,
+    "rateLimiting": false,
+    "metrics": true
+  },
+  "limits": {
+    "maxUsernameLength": 32,
+    "maxEmailLength": 254
+  }
+}
