@@ -28,6 +28,22 @@ test("GET /api/info returns service metadata", async () => {
   }
 });
 
+test("GET /api/healthz returns health metadata", async () => {
+  const s = await startTestServer();
+  try {
+    const r = await fetch(`${s.url}/api/healthz`);
+    assert.equal(r.status, 200);
+    const body = await r.json();
+    assert.equal(body.status, "ok");
+    assert.equal(typeof body.uptime, "number");
+    assert.equal(Number.isFinite(body.uptime), true);
+    assert.equal(typeof body.timestamp, "string");
+    assert.equal(Number.isNaN(Date.parse(body.timestamp)), false);
+  } finally {
+    await s.close();
+  }
+});
+
 test("POST /api/users rejects missing fields", async () => {
   const s = await startTestServer();
   try {

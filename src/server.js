@@ -20,6 +20,14 @@ export function createApp() {
     });
   });
 
+  app.get("/api/healthz", (_req, res) => {
+    res.json({
+      status: "ok",
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+    });
+  });
+
   app.use("/api/users", usersRouter);
 
   return app;

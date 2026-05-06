@@ -1,6 +1,7 @@
 const form = document.getElementById("register-form");
 const result = document.getElementById("result");
 const userList = document.getElementById("user-list");
+const statusBadge = document.getElementById("status-badge");
 
 async function refreshUsers() {
   const r = await fetch("/api/users");
@@ -29,5 +30,22 @@ form.addEventListener("submit", async (event) => {
 
 refreshUsers();
 
-// TODO (IDE Agent Mode demo, Issue #3):
-// Poll /api/healthz every 10s and update #status-badge accordingly.
+function setStatusBadge(status, badgeClass) {
+  statusBadge.textContent = `status: ${status}`;
+  statusBadge.className = `badge ${badgeClass}`;
+}
+
+async function refreshStatus() {
+  try {
+    const r = await fetch("/api/healthz");
+    if (!r.ok) {
+      throw new Error("health check failed");
+    }
+    setStatusBadge("ok", "badge-ok");
+  } catch {
+    setStatusBadge("down", "badge-down");
+  }
+}
+
+refreshStatus();
+setInterval(refreshStatus, 10_000);
