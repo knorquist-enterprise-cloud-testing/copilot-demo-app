@@ -1,0 +1,15 @@
+.git
+.github
+.gitignore
+.DS_Store
+node_modules
+npm-debug.log
+test
+*.test.js
+README.md
+AGENTS.md
+.dockerignore
+Dockerfile
+.env
+.env.local
+coverage

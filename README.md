@@ -25,6 +25,21 @@ npm start
 # open http://localhost:3000
 ```
 
+## Or pull the published container image
+
+After every push to `main`, a multi-arch image is built and published to GHCR:
+
+```bash
+docker run --rm -p 3000:3000 ghcr.io/knorquist-enterprise-cloud-testing/copilot-demo-app:latest
+# open http://localhost:3000
+```
+
+Tags published:
+- `latest` — most recent build of `main`
+- `main` — same as `latest`
+- `sha-<short>` — every commit on `main`
+- `pr-<n>` — built (not pushed) for every pull request
+
 ## Layout
 
 ```
